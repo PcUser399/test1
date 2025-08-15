@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mo3adli</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="screen-orientation" content="landscape">
+    <meta name="x5-orientation" content="landscape">
+     <style>
+      body{
+        background-color: black;
+        padding: 20px 0px;
+
+      }
+        .title-container-and-options{
+          width: 100%;
+          height: auto;
+          /* padding: 10px; */
+        }
+        .title{
+          color: white;
+          font-size :  3.8vw;
+          font-weight: bolder;
+          text-transform: uppercase;
+          text-align: center;
+          letter-spacing: 2px;
+          line-height: 5vw;
+        }
+        .section-container{
+          margin-top: 28.5px;
+          display: flex;
+          justify-content: center;
+          gap: 25px;
+        }
+        .section{
+          padding: 10px 0px;
+          width: 8vw;
+          min-width: 80px;
+          font: 14px Arial ;
+          background-color: #1ebba3;
+          text-align: center;
+          border: 5px solid #099983;
+          border-radius: 30px;
+          color: white;
+          outline:rgb(0, 110, 100) ;
+        
+          display: inline-block;
+          cursor:pointer;
+          margin-bottom: 25px;
+        }
+        .section:hover{
+          background-color: rgb(9, 153, 131) ;
+          border: 5px solid rgb(0, 110, 100);
+      }
+      .section:active{
+          background-color: rgb(0, 90, 80);
+      }
+        .session{
+          color: gray;
+          margin-bottom: 50px;
+          text-transform: uppercase;
+          font: 20px serif ;
+          letter-spacing: 3px;
+          text-decoration: underline;
+          outline: none;
+          text-align: center;
+        }
+        .inputs-container{
+          display: grid;
+          margin: 15px 13.5vw;
+          align-items: center;
+          width: auto;  
+          grid-template-columns: repeat(3,1fr);
+          justify-items: s;
+          height: auto;
+        }
+        .first-element{
+          text-align: end;
+        }
+        .middal-element{
+          text-align: center;
+        }
+        .right-element{
+          text-align: start;
+        }
+        .input{
+          background-color: transparent;
+          border:2px solid #3498db;
+          height: 43px;
+          width: 15.8vw;
+          border-radius: 50px;
+          color: white;
+          text-align: center;
+          transition: 0.25s;
+          min-width: 0px;
+      }
+      .input::placeholder{
+        font-family: serif;
+      }
+      .stopDefaultFocus{
+        border: none;
+        background-color: transparent;
+        /* display: none; */
+      }
+     </style>
+  </head>
+
+  <body>
+    <div class="title-container-and-options">
+        <div class="title">Calculer Moyenne et Score BAC MATHÉMATIQUES</div>
+        <div class="section-container">
+          <button class="section">Principale</button>
+          <button class="section">&nbspControle&nbsp</button>
+        </div>
+        <div class="session">Session principale</div>
+
+
+
+
+        <div class="inputs-container">
+          <div class="first-element"> <input class="input" placeholder="Math" onkeypress="if(event.key=='Enter'){ enterPressed(1)}" onblur="clickedAway(1)" onkeydown="document.querySelector('.a'+1).setCustomValidity('')"> </div>
+          <div class="middal-element"> <button class="stopDefaultFocus"></button> </div>
+          <div class="right-element"> <input class="input" placeholder="Math" onkeypress="if(event.key=='Enter'){ enterPressed(1)}" onblur="clickedAway(1)" onkeydown="document.querySelector('.a'+1).setCustomValidity('')"> </div>
+        </div>
+
+
+
+
+
+
+
+
+
+    </div>
+
+    <script>
+      document.body.addEventListener('click', () => {
+         document.documentElement.requestFullscreen()
+         .then(() => screen.orientation.lock("landscape"))
+          .catch(err => console.error(err));
+      });
+
+    </script>
+
+  </body>
+</html>
