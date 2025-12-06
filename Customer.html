@@ -253,6 +253,12 @@
       const acCN = document.getElementById('customerId');
       const acOD = document.getElementById('accoutOpenDate');
 
+      let allTransactionsIds = [] ;
+      let allLoansIds = [] ;
+
+      generateIdsArrayOutOfallLoans();
+      generateIdsArrayOutOfallTransactions();
+
       displayUpperInfo();
 
 
@@ -300,7 +306,7 @@
         allLoans.forEach((el,ind)=>{allLoansIds[ind]=el.id});
       }
 
-      function addLoan(Ltype,stD,enD,amount,ITR,id,paidAmount,RB,status){
+      window.addLoan = function (Ltype,stD,enD,amount,ITR,id,paidAmount,RB,status){
         let htmlStr;
         if(Ltype[0]=='R'){
           if(status !='Rejected'){
@@ -411,19 +417,19 @@
         Tsp.firstElementChild.firstElementChild.classList.add('first-transaction');}
       }
 
-      function loadAllTransactions(){
+      window.loadAllTransactions = function (){
         for(let el of allTransactions){
           displayNewTransaction(...Object.values(el));
         }
       }
 
-      function loadAllLoans(){
+      window.loadAllLoans = function (){
         for(let el of allLoans){
           addLoan(...Object.values(el));
         }
       }
 
-      function generateNewTransactionId(allTransactionsIds){
+      window.generateNewTransactionId = function (allTransactionsIds){
         let newId ;
         do{
             newId = 't'+randomBetween100and5000() // !!!!!!!!!!!!!!! see how hamma stored ids of transactions !!!!!!!!!!!!!!!!!! if created in c++ enter id as an arg
@@ -431,7 +437,7 @@
         return newId ;
       }
 
-      function generateNewLoansId(allLoansIds,t='l'){
+      window.generateNewLoansId = function (allLoansIds,t='l'){
         let newId ;
         let f = t=='r' ? 'R':'L' ;
         do{
@@ -441,7 +447,7 @@
       }
 
       
-      function displayNewTransaction(type , amount , date , newId , disableUndo='false'){// type must be exactly Deposit or Withdraw !!! and status Active Completed or Overdue + update , missing to update allT leave it for c++ possible id creation as well 
+      window.displayNewTransaction = function (type , amount , date , newId , disableUndo='false'){// type must be exactly Deposit or Withdraw !!! and status Active Completed or Overdue + update , missing to update allT leave it for c++ possible id creation as well 
           let fc = Tsp.firstElementChild ;
           let ds = disableUndo == 'true'? 'blockTransition':''
           
@@ -480,7 +486,7 @@
           Tsp.insertAdjacentHTML("afterbegin", htmlStr);
 
       }
-      function getFormattedDate() {
+      window.getFormattedDate = function () {
         const now = new Date();
 
         const day = String(now.getDate()).padStart(2, "0");
@@ -489,7 +495,7 @@
 
         return `${month}/${day}/${year}`;
     }
-      function randomBetween100and5000() {
+      window.randomBetween100and5000 = function () {
         return Math.floor(Math.random() * (5000 - 100 + 1)) + 100;
       }   
 
@@ -501,7 +507,7 @@
 
                 displayBox(bubble,fc);
             }
-      function createTransactionAddRequestBox(id){
+      window.createTransactionAddRequestBox = function (id){
                 const box = document.createElement("div");
                 let T = {selected:''};
 
@@ -588,7 +594,7 @@
 
 
                 const Dimg = document.createElement("img");
-                Dimg.src = "images/DepositIcon.png";
+                Dimg.src = "images/depositIcon.png";
                 iconContainer2.appendChild(Dimg);
                 const Dtxt = document.createElement("div");
                 Dtxt.innerText = "Deposit";
@@ -673,7 +679,7 @@
 
                 return {box,title,T,exitButton,add,ipp}
             }
-      function displayBox(obj,fc = ()=>{}){ // fc to apllie orders when exit is clicked
+      window.displayBox = function (obj,fc = ()=>{}){ // fc to apllie orders when exit is clicked
 
 
                 const coverAll = document.createElement("div");
@@ -712,7 +718,7 @@
                   displayNewTransaction(obj.T.selected , obj.ipp.value , getFormattedDate()  , generateNewTransactionId(allTransactionsIds));exit()}});},1000)} // [] to be changed too allTransactionId
             }
 
-      function addRow(card,label, value, valueClass = "") {
+      window.addRow = function (card,label, value, valueClass = "") {
                     const row = document.createElement("div");
                     row.className = "loan-row";
 
@@ -730,7 +736,7 @@
       }
 
 
-      function createLoanDetailsBox(Ltype,stD,enD,amount,ITR,id,paidAmount,RB,status='Waiting For Response'){
+      window.createLoanDetailsBox = function (Ltype,stD,enD,amount,ITR,id,paidAmount,RB,status='Waiting For Response'){
                 const box = document.createElement("div");
 
                 box.id = "box-"+id;
@@ -836,13 +842,13 @@
 
                 return {box,exitButton}
             }
-      function desactivateUndo(){ // to be activated after command from server Laktharia i will remove it
+      window.desactivateUndo = function (){ // to be activated after command from server Laktharia i will remove it
         const el = Tsp.firstElementChild ;
         if(el){
           el.firstElementChild.classList.add('blockTransition');
         }
       }
-      function fixType(Ltype){
+      window.fixType = function (Ltype){
         if (Ltype[0]=='R'){
           return (Ltype.split('-'))[1] ;
         }
