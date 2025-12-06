@@ -2114,9 +2114,12 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 /* Status colors */
+.status-Active,
 .status-active {
     color: #00ff66;
 }
+.status-Inactive,
+.status-Completed,
 .status-inactive,
 .status-completed {
     color: #00c8ff;
@@ -2143,7 +2146,7 @@ input[type=number]::-webkit-outer-spin-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(2.5vh + 2.5vw);
+  font-size: calc(1.9vh + 1.9vw);
   font-family: serif;
 }
 .right-side-employee{
@@ -2156,6 +2159,7 @@ input[type=number]::-webkit-outer-spin-button {
   align-content: center;
   margin-left: calc(1vh + 1vw);
 }
+.Employee-Id,
 .employee-id{
   color: gray;
   font-family: 'Viable Logic',sans-serif;
@@ -2163,6 +2167,7 @@ input[type=number]::-webkit-outer-spin-button {
   display: flex;
   align-items: center;
 }
+
 
 .img-container{
   margin-left: 2.5%;

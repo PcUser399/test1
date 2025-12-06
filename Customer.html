@@ -259,6 +259,9 @@
       generateIdsArrayOutOfallLoans();
       generateIdsArrayOutOfallTransactions();
 
+      console.log(allLoansIds);
+      console.log(allTransactionsIds);
+
       displayUpperInfo();
 
 
@@ -284,7 +287,7 @@
         
 
       }
-      window.afficheLoanDetails = function (Ltype,stD,enD,amount,ITR,id='',paidAmount='',RB='',status='',fc = ()=>{}){// update allT , TIds , Balance , active when add.click
+      window.afficheLoanDetails = function (Ltype,stD,enD,amount,ITR,id='',paidAmount='',RB='',status='Waiting For Response',fc = ()=>{}){// update allT , TIds , Balance , active when add.click
         let bubble = createLoanDetailsBox(Ltype,stD,enD,Number(amount).toFixed(2),(Number(ITR)*100).toFixed(2)+'%',id,Number(paidAmount).toFixed(2),Number(RB).toFixed(2),status);
         displayBox(bubble,fc);
     }
@@ -446,6 +449,9 @@
         return newId ;
       }
 
+      window.verifyWithdrawAmount = function(amount){
+        return Number(amount) <= Number(allAccountData.balance) ;
+      }
       
       window.displayNewTransaction = function (type , amount , date , newId , disableUndo='false'){// type must be exactly Deposit or Withdraw !!! and status Active Completed or Overdue + update , missing to update allT leave it for c++ possible id creation as well 
           let fc = Tsp.firstElementChild ;
@@ -454,7 +460,7 @@
           if(fc){
             fc.firstElementChild.classList.remove('first-transaction') ;
           }
-          const color = (type=='deposit' || type=='loanDeposit')? 'red':'green';
+          const color = (type=='deposit' || type=='Deposit' || type=='loanDeposit')? 'red':'green';
           const htmlStr = `
           <div class="transaction-container" data-id="${newId}">
                   <div class="transaction first-transaction ${ds}">
@@ -714,8 +720,15 @@
                     obj.add.setCustomValidity('Please Enter All Required Data');
                     obj.add.reportValidity();
                   }
+                  else if(obj.T.selected=='Withdraw' && !verifyWithdrawAmount(obj.ipp.value)){
+                    obj.add.setCustomValidity('Insufficient Balance For This Withdraw');
+                    obj.add.reportValidity();
+                  }
                   else{
-                  displayNewTransaction(obj.T.selected , obj.ipp.value , getFormattedDate()  , generateNewTransactionId(allTransactionsIds));exit()}});},1000)} // [] to be changed too allTransactionId
+                    allAccountData.balance = obj.T.selected=='Deposit' ? Number(allAccountData.balance) + Number(obj.ipp.value) : Number(allAccountData.balance) - Number(obj.ipp.value) ; 
+                    acB.innerText = Number(allAccountData.balance).toFixed(2);
+                    // send to c++ and get the new transaction thhen displayNewTransaction put arguments from tr c++ loaded data
+                    displayNewTransaction(obj.T.selected , obj.ipp.value , getFormattedDate()  , 't210');exit()}});},1000)} // [] 
             }
 
       window.addRow = function (card,label, value, valueClass = "") {

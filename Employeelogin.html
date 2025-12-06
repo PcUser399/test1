@@ -193,12 +193,15 @@
         </div>
       </section>
     </div>
+    <script src="Load.js"></script>
     <script>
+      let allEmployees ;
+      main();
+      async function main(){        
+        res = await Load('Load All Employees') ;
+        allEmployees = JSON.parse(res.result) ;
+      }
       function validateEmployeeId(id){
-        let allEmployees ;
-        main();
-        async function main(){        
-          allEmployees = await Load('Load All Accounts') ;}
 
         if (!id) return false;
         id = id.trim().toUpperCase();
@@ -207,6 +210,7 @@
         return /^EMP\d{4}$/.test(id);
     
       }
+
       function verifyEmployeeExistence(val){
         let ind = IND(allEmployees,'EmployeeId',val)
         return ind > -1 ; // impliment later with c++
