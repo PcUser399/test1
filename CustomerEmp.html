@@ -64,7 +64,20 @@
                 Account Type : 
               </div>
               <div style="font-size: calc(1.25vh + 1.25vw);margin-top: 7px;" id="account-type"></div>
-              <div class="upper-part" style="margin-top: 10px;display: flex;margin-top: 20px;"><div style="color: rgb(204 255 0);">Status :</div>&nbsp&nbsp<div id="account-status"></div></div>
+              <div class="upper-part" style="margin-top: 10px;display: flex;margin-top: 20px;"><div style="color: rgb(204 255 0);">Status :</div>&nbsp&nbsp
+              <div>
+                <div class="mb-6 border border-gray-900 focus-within:border-white overflow-hidden rounded-3xl">
+                  <select class="select-account-type" id="select-status">
+                    <option class="option-account-type" selected disabled hidden id="account-status">Account Status</option>
+                    <option class="option-account-type">active</option>
+                    <option class="option-account-type">inactive</option>
+                    <option class="option-account-type">closed</option>  
+                  </select>
+                </div>
+              </div>
+            
+            
+            </div>
               
             </div>
 
@@ -234,6 +247,11 @@
         var allLoans = allAccountData['Loans'] ;
 
 
+        window.changeAccountStatus = async function(newStatus){
+          await Load("Change Account Status", EnterInfo , {newStatus}) ;
+        }
+
+
         const Tsp = document.getElementById('direct-transaction-container'); 
         const Lsp = document.getElementById('direct-Loan-container'); 
         console.log(Lsp);
@@ -246,6 +264,8 @@
         const acN2 = document.getElementById('accountName');
         const acCN = document.getElementById('customerId');
         const acOD = document.getElementById('accoutOpenDate');
+        const StatusSelect = document.getElementById('select-status');
+        StatusSelect.addEventListener('change',()=>changeAccountStatus(StatusSelect.value)) ;
 
 
 
@@ -565,7 +585,7 @@
 
                 if(obj.Del){
                   setTimeout(()=>{obj.Del.addEventListener('click',()=>{
-                    deleteLoan(obj.Del.dataset.id);
+                    deleteLoanBtPress(obj.Del.dataset.id) ;
                     exit()
                   },{ once: true });},1000) ;
                 }
@@ -645,9 +665,9 @@
                   // Helper: create each row
 
                   // Add rows
-                  addRow(box,"Principal Amount :",amount);
+                  addRow(box,"Principal Amount :",Number(amount).toFixed(0)+' TDN');
                   addRow(box,"Loan Type:",fixType(Ltype));
-                  addRow(box,"Interest Rate :", ITR);
+                  addRow(box,"Interest Rate :", Number(ITR).toFixed(2)+'%');
                   addRow(box,"Request index :", id);
                   addRow(box,"Request Date :", stD);
                   addRow(box,"Loan End Date :", enD);
@@ -670,10 +690,10 @@
                 
                 addRow(box,"Loan Type :",fixType(Ltype));
                 addRow(box,"Loan ID :", id);
-                addRow(box,"Principal Amount :",amount);
-                addRow(box,"Interest Rate :", ITR);
-                addRow(box,"Amount Paid :", paidAmount);//id,Ltype,stD,enD,amount,paidAmount,RB,ITR
-                addRow(box,"Remaining Balance :", RB);
+                addRow(box,"Principal Amount :",Number(amount).toFixed(0)+' TDN');
+                addRow(box,"Interest Rate :", Number(ITR).toFixed(2)+'%');
+                addRow(box,"Amount Paid :", Number(paidAmount).toFixed(0) + "TDN");//id,Ltype,stD,enD,amount,paidAmount,RB,ITR
+                addRow(box,"Remaining Balance :", Number(RB).toFixed(0) + "TDN");
                 addRow(box,"Start Date :", stD);
                 addRow(box,"End Date :", enD);
 
@@ -749,9 +769,9 @@
 
                   const htmlStr = `
                     <option class="option-account-type" selected disabled hidden>change Status</option>
-                    <option class="option-account-type status-Active">Active</option>
-                    <option class="option-account-type status-Completed">Completed</option>
-                    <option class="option-account-type status-Overdue">Overdue</option>`
+                    <option class="option-account-type status-Active">active</option>
+                    <option class="option-account-type status-Completed">completed</option>
+                    <option class="option-account-type status-Overdue">overdue</option>`
                   change.innerHTML=htmlStr ;                  
 
 
@@ -835,20 +855,25 @@
 
                 return {box,exitButton,Del,AcceptRq,RefuseRq}
             }
-       window.updateCpp_DeleteLoan = function(LId){//work on later
+       window.updateCpp_DeleteLoan = async function(LId){//work on later
+        await Load('Delete Loan',  LId) ;
         return true
       }
-       window.updateCpp_ChangeLoanStatus = function(LId){//work on later
+       window.updateCpp_ChangeLoanStatus = async function(LId,newStatus){//work on later
+        await Load('Change Loan Status',  LId , {newStatus}) ;
         return true
       }
-       window.updateCpp_AcceptRequests = function(RId){//work on later  
+       window.updateCpp_AcceptRequests = async function(RId){//work on later  
+        acB.innerHTML  =  ( Number((acB.innerHTML).split(' ')[0]) +  Number(allAccountData.Loans[find(RId)].amount) ).toFixed(0) + ' TDN'  ;
+        await Load('Accept Request',  RId) ;
         return true
       }
-       window.updateCpp_refuseRequest = function(RId){//work on later
+       window.updateCpp_refuseRequest = async function(RId){//work on later
+        await Load('Refuse Loan Request',  RId) ;
         return true
       }
        window.deleteLoan = function(LId){
-        updateCpp_DeleteLoan(LId) ;
+        
         const ln = Lsp.children.length  ;
         let IND ;
         for(let i = 0 ; i< ln ; i++){
@@ -860,6 +885,12 @@
           }
         }
       }
+
+      window.deleteLoanBtPress = function(LId){
+         updateCpp_DeleteLoan(LId) ;
+         deleteLoan(LId);
+      }
+      
        window.find = function(id){
         for(let i = 0 ; i < allAccountData.Loans.length ; i++){
           if (allAccountData.Loans[i].id == id){
@@ -869,7 +900,7 @@
         return -1 ;
       }
        window.changeStatus = function(LId,newStatus){
-        updateCpp_ChangeLoanStatus(LId);
+        updateCpp_ChangeLoanStatus(LId,newStatus);
         const ln = Lsp.children.length  ;
         let el = document.getElementById(LId);
         let fn = document.getElementById(`D-${LId}`) ;

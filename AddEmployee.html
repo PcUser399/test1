@@ -81,34 +81,42 @@
           <div class="w-full md:w-1/2 p-8" style="border-radius: 100px;border: 2px solid gray;margin-top: calc(2vh + 2vw);margin-bottom: calc(2vh + 2vw);">
             <div class="px-4 pt-10 md:pb-40 max-w-lg mx-auto"><a class="inline-block mb-36" href="#">                </a>              
               <div class="text-center mx-auto">
-                <h3 class="mb-4 text-5xl text-white tracking-5xl">Promote Employee</h3>
-                <p class="mb-10 text-gray-300" id="EMPID">EMP0001</p>
+                <h3 class="mb-4 text-5xl text-white tracking-5xl">Add Employee</h3>
+                <p class="mb-10 text-gray-300" id="EMPID">New Employee</p>
                 <div class="flex flex-wrap -1 mb-7">
                 </div>
                 <div class="flex flex-wrap items-center mb-10">
                   <div class="flex-1 bg-gray-900">
                     <div class="h-px"></div>
                   </div>
-                  <div class="px-5 text-xs text-gray-300 font-medium">Promotions</div>
+                  <div class="px-5 text-xs text-gray-300 font-medium">New Employee</div>
                   <div class="flex-1 bg-gray-900">
                     <div class="h-px"></div>
                   </div>
                 </div>
                 <div class="mb-6 border border-gray-900 focus-within:border-white overflow-hidden rounded-3xl">
-                  <input autocomplete="off" id="Am" class="pl-6 pr-16 py-4 text-gray-300 w-full placeholder-gray-300 outline-none bg-transparent" type="text" placeholder="Amout To Add In Salary"/>
+                  <input autocomplete="off" id="Emp Name" class="pl-6 pr-16 py-4 text-gray-300 w-full placeholder-gray-300 outline-none bg-transparent" type="text" placeholder="Employee First Name"/>
                 </div>
 
                 <div class="mb-6 border border-gray-900 focus-within:border-white overflow-hidden rounded-3xl">
-                  <input autocomplete="off" id="NB" class="pl-6 pr-16 py-4 text-gray-300 w-full placeholder-gray-300 outline-none bg-transparent" type="text" placeholder="New Branch"/>
+                  <input autocomplete="off" id="Emp Last Name" class="pl-6 pr-16 py-4 text-gray-300 w-full placeholder-gray-300 outline-none bg-transparent" type="text" placeholder="Employee Last Name"/>
                 </div>
-
 
                 <div class="mb-6 border border-gray-900 focus-within:border-white overflow-hidden rounded-3xl">
-                  <textarea autocomplete="off" id="PR" class="pl-6 pr-16 py-4 text-gray-300 w-full placeholder-gray-300 outline-none bg-transparent" type="text" placeholder="Promotion Reason"></textarea>
+                  <input autocomplete="off" id="Emp Salary" class="pl-6 pr-16 py-4 text-gray-300 w-full placeholder-gray-300 outline-none bg-transparent" type="text" placeholder="Employee Salary"/>
                 </div>
-                
 
-                <a class="block mb-6 px-14 py-4 text-center font-medium tracking-2xl border-2 border-green-400 bg-green-400 hover:bg-green-500 text-black focus:ring-4 focus:ring-green-500 focus:ring-opacity-40 rounded-full transition duration-300"  style="cursor: pointer;" onclick="SignInClicked()">Apply Promotion</a>
+                <div class="mb-6 border border-gray-900 focus-within:border-white overflow-hidden rounded-3xl">
+                  <input autocomplete="off" id="Emp Adress" class="pl-6 pr-16 py-4 text-gray-300 w-full placeholder-gray-300 outline-none bg-transparent" type="text" placeholder="Employee Adress"/>
+                </div>
+
+                <div class="mb-6 border border-gray-900 focus-within:border-white overflow-hidden rounded-3xl">
+                  <input autocomplete="off" id="Emp Branch" class="pl-6 pr-16 py-4 text-gray-300 w-full placeholder-gray-300 outline-none bg-transparent" type="text" placeholder="Employee Branch"/>
+                </div>
+
+       
+
+                <a class="block mb-6 px-14 py-4 text-center font-medium tracking-2xl border-2 border-green-400 bg-green-400 hover:bg-green-500 text-black focus:ring-4 focus:ring-green-500 focus:ring-opacity-40 rounded-full transition duration-300"  style="cursor: pointer;" onclick="SignInClicked()">Add Employee</a>
               
               </div>
             </div>
@@ -194,16 +202,16 @@
         </div>
       </section>
     </div>
+    <script src="Load.js"></script>
     <Script>
-      let params = new URLSearchParams(window.location.search);
-      let EnterInfo = JSON.parse(params.get("value"));
+      
 
-      const i1 = document.getElementById('Am');
-      const i2 = document.getElementById('NB');
-      const i3 = document.getElementById('PR');
-      const EI = document.getElementById('EMPID');
+      const EmpName = document.getElementById('Emp Name');
+      const EmpLastName = document.getElementById('Emp Last Name');
+      const EmpSalary = document.getElementById('Emp Salary');
+      const EmpAdress = document.getElementById('Emp Adress');
+      const EmpBranch = document.getElementById('Emp Branch');
 
-      EI.innerText = EnterInfo ;
 
     function verifyval1(val1){//bery easy ask gbt But Must Add !!!!!!!!!!!!!!!!!!!!!
       return true
@@ -211,32 +219,33 @@
     function verifyval2(val2){//bery easy ask gbt But Must Add !!!!!!!!!!!!!!!!!!!!!
       return true
     }
-    function updateAccountsCpp(IBAN,CustomerId,AccountName,AccountType){ // !!!!!! add new accout and return it s Number !!!!!!
-      return 0 ;// to be changed others Acc Propreties to default Loans [] ; transactions [] ; Balance 1500TDN ...
-    }
-    function updateCpp_PromoteEmployee(val1,val2){//work on later already exist in CEO file devolp it once 
+
+    async function AddEmployee(EmpName , EmpLastName, EmpSalary,EmpAdress,EmpBranch){//work on later already exist in CEO file devolp it once 
+        await Load('Add Employee', "10" ,{ EmpName , EmpLastName , EmpSalary,EmpAdress,EmpBranch} ) ;
+        window.location.href = 'CEO.html';
         return true
       }
 
     function SignInClicked(){
-      const val1 = i1.value ;
-      const val2 = i2.value;
-      const Reason = i3.value;
+      const Name = EmpName.value ;
+      const LastName = EmpName.value;
+      const Salary = EmpSalary.value;
+      const Adress = EmpAdress.value;
+      const Branch = EmpBranch.value;
 
-      i1.addEventListener('keypress',()=>i1.setCustomValidity(''));
-      i2.addEventListener('keypress',()=>i2.setCustomValidity(''));
+      EmpName.addEventListener('keypress',()=>EmpName.setCustomValidity(''));
+      EmpName.addEventListener('keypress',()=>EmpName.setCustomValidity(''));
 
-      if(!verifyval1(val1)){
-        i1.setCustomValidity('Unvalid Amount');
-        i1.reportValidity();
+      if(!verifyval1(Name)){
+        EmpName.setCustomValidity('Unvalid name');
+        EmpName.reportValidity();
       }
-      else if (!verifyval2(val2)){
-        i2.setCustomValidity('Unvalid Branch');
-        i2.reportValidity();
+      else if (!verifyval2(LastName)){
+        EmpLastName.setCustomValidity('Unvalid name');
+        EmpLastName.reportValidity();
       }
       else{
-      updateCpp_PromoteEmployee(val1,val2);
-      window.open('CEO.html','_self');}
+      AddEmployee(Name,LastName,Salary,Adress,Branch);}
 
     }
 

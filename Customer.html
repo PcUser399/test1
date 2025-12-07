@@ -223,18 +223,18 @@
       console.log(EnterInfo);
 
       let allAccountData ;
-      let allTransactions ;
-      let allLoans ;
+      let allTransactions = [];
+      let allLoans = [] ;
       main();
       async function main(){        
         res = await Load('Load Account',EnterInfo[1]) ;
         allAccountData = JSON.parse(res.result) ;
         allTransactions = allAccountData['transactions'] ;
-        console.log(allTransactions);
+        allTransactions.reverse();
         allLoans = allAccountData['Loans'] ;
 
         
-
+        console.log(allAccountData);
       
 
 
@@ -256,11 +256,10 @@
       let allTransactionsIds = [] ;
       let allLoansIds = [] ;
 
+
       generateIdsArrayOutOfallLoans();
       generateIdsArrayOutOfallTransactions();
 
-      console.log(allLoansIds);
-      console.log(allTransactionsIds);
 
       displayUpperInfo();
 
@@ -414,10 +413,19 @@
       //   }
       // }
 
-      window.undoTransaction = function (){ // missing variavle updates , allTransactions , transactionsIds , Balance
+      window.undoTransaction = async function (){ // missing variavle updates , allTransactions , transactionsIds , Balance
+        if(Tsp.firstElementChild.dataset.type == 'deposit' || Tsp.firstElementChild.dataset.type == 'Deposit'  || Tsp.firstElementChild.dataset.type == 'loanDeposit'){
+          allAccountData.balance = Number(allAccountData.balance) - Number(Tsp.firstElementChild.querySelector('.contain-transaction-type-amount-ID').firstElementChild.firstElementChild.innerText.replace('TND','')) ;
+          acB.innerText = Number(allAccountData.balance).toFixed(2);
+        }
+        else {
+          allAccountData.balance = Number(allAccountData.balance) + Number(Tsp.firstElementChild.querySelector('.contain-transaction-type-amount-ID').firstElementChild.firstElementChild.innerText.replace('TND','')) ;
+          acB.innerText = Number(allAccountData.balance).toFixed(2);
+        }
         Tsp.removeChild(Tsp.firstElementChild) ;
         if(Tsp.firstElementChild){
-        Tsp.firstElementChild.firstElementChild.classList.add('first-transaction');}
+        Tsp.firstElementChild.firstElementChild.classList.add('first-transaction');} 
+        await Load('Undo Last Transaction',allAccountData.number) ;
       }
 
       window.loadAllTransactions = function (){
@@ -462,7 +470,7 @@
           }
           const color = (type=='deposit' || type=='Deposit' || type=='loanDeposit')? 'red':'green';
           const htmlStr = `
-          <div class="transaction-container" data-id="${newId}">
+          <div class="transaction-container" data-id="${newId}" data-type="${type}">
                   <div class="transaction first-transaction ${ds}">
                     <div class="icon-container">
                       <img src="images/${type}Icon.png">
@@ -499,7 +507,7 @@
         const month = String(now.getMonth() + 1).padStart(2, "0"); 
         const year = now.getFullYear();
 
-        return `${month}/${day}/${year}`;
+        return `${day}/${month}/${year}`;
     }
       window.randomBetween100and5000 = function () {
         return Math.floor(Math.random() * (5000 - 100 + 1)) + 100;
@@ -685,6 +693,21 @@
 
                 return {box,title,T,exitButton,add,ipp}
             }
+      window.canWithdraw = function(amount) {
+      if (amount <= 0 || amount % 10 !== 0) return false;
+      for (let f50 = 0; f50 * 50 <= amount; f50++) {
+          for (let f20 = 0; f20 * 20 + f50 * 50 <= amount; f20++) {
+              let remainder = amount - (f50 * 50 + f20 * 20);
+
+              if (remainder % 10 === 0) {
+                  return true;
+              }
+          }
+    }
+
+    return false; // No valid combination
+}
+
       window.displayBox = function (obj,fc = ()=>{}){ // fc to apllie orders when exit is clicked
 
 
@@ -724,11 +747,19 @@
                     obj.add.setCustomValidity('Insufficient Balance For This Withdraw');
                     obj.add.reportValidity();
                   }
+                  else if(obj.T.selected=='Withdraw' && !canWithdraw(Number(obj.ipp.value))){
+                    obj.add.setCustomValidity('The ATM Cannot Dispense This Amount , Please Enter An Amount Multiple Of 10 ,20 or 50TDN');
+                    obj.add.reportValidity();
+
+                  }
                   else{
                     allAccountData.balance = obj.T.selected=='Deposit' ? Number(allAccountData.balance) + Number(obj.ipp.value) : Number(allAccountData.balance) - Number(obj.ipp.value) ; 
                     acB.innerText = Number(allAccountData.balance).toFixed(2);
                     // send to c++ and get the new transaction thhen displayNewTransaction put arguments from tr c++ loaded data
-                    displayNewTransaction(obj.T.selected , obj.ipp.value , getFormattedDate()  , 't210');exit()}});},1000)} // [] 
+                    updateAllTransaction(obj.T.selected , obj.ipp.value);
+                    displayNewTransaction(obj.T.selected , obj.ipp.value , getFormattedDate()  , 'Pending...');exit()}});},1000)
+                    
+                  } // [] 
             }
 
       window.addRow = function (card,label, value, valueClass = "") {
@@ -748,7 +779,13 @@
                     card.appendChild(row);
       }
 
-
+      window.updateAllTransaction = async function (type , amount){
+        await Load('Add New Transaction',"10",{
+          accountNumber: allAccountData.number,
+          type: type,
+          amount: amount
+        }) ;
+      }
       window.createLoanDetailsBox = function (Ltype,stD,enD,amount,ITR,id,paidAmount,RB,status='Waiting For Response'){
                 const box = document.createElement("div");
 

@@ -33,7 +33,7 @@
                   </ul>
                 </div>
                 <div class="w-auto hidden lg:block">
-                  <div class="inline-block"><a class="inline-block px-8 py-4 text-white hover:text-black tracking-tighter hover:bg-green-400 border-2 border-white focus:border-green-400 focus:border-opacity-40 hover:border-green-400 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300" href="login.html">Login</a></div>
+                  <div class="inline-block"><a class="inline-block px-8 py-4 text-white hover:text-black tracking-tighter hover:bg-green-400 border-2 border-white focus:border-green-400 focus:border-opacity-40 hover:border-green-400 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300" href="about.html">About Us</a></div>
                 </div>
                 <div class="w-auto lg:hidden">
                   <button class="relative z-10 inline-block" x-on:click="mobileNavOpen = !mobileNavOpen">
@@ -65,10 +65,10 @@
               </div>
               <div class="flex flex-col justify-center py-16 w-full">
                 <ul>
-                  <li class="mb-8 text-white font-medium hover:text-opacity-90 tracking-tighter"><a href="about.html"></a></li>
-                  <li class="mb-8 text-white font-medium hover:text-opacity-90 tracking-tighter"><a href="pricing.html"></a></li>
-                  <li class="mb-8 text-white font-medium hover:text-opacity-90 tracking-tighter"><a href="blog.html"></a></li>
-                  <li class="text-white font-medium hover:text-opacity-90 tracking-tighter"><a href="contact.html"></a></li>
+                  <li class="mb-8 text-white font-medium hover:text-opacity-90 tracking-tighter"><a href="about.html">About</a></li>
+                  <li class="mb-8 text-white font-medium hover:text-opacity-90 tracking-tighter"><a href="pricing.html">Pricing</a></li>
+                  <li class="mb-8 text-white font-medium hover:text-opacity-90 tracking-tighter"><a href="blog.html">Blog</a></li>
+                  <li class="text-white font-medium hover:text-opacity-90 tracking-tighter"><a href="contact.html">Contact</a></li>
                 </ul>
               </div>
               <div class="flex flex-col justify-end w-full pb-8"><a class="inline-block px-8 py-4 text-center text-white hover:text-black tracking-tighter hover:bg-green-400 border-2 border-white focus:border-green-400 focus:border-opacity-40 hover:border-green-400 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300" href="login.html">Login</a></div>
@@ -76,79 +76,58 @@
           </nav>
         </div>
       </section>
-      <section class="py-20 overflow-hidden">
-        <div class="container px-4 mx-auto">
-          <div class="md:max-w-xl text-center mx-auto mb-20"><span class="inline-block mb-4 text-sm text-green-400 font-medium tracking-tighter">Check our stats</span>
-            <h2 class="font-heading text-7xl text-white tracking-tighter-xl">About us</h2>
-          </div>
-          <div class="max-w-5xl mx-auto">
-            <div class="flex flex-wrap lg:items-center -m-8 lg:-m-12">
-              <div class="w-full md:w-1/2 p-8 lg:p-12">
-                <div class="max-w-max mx-auto"><img class="rounded-3xl" src="images/team.jpg" alt=""/></div>
-              </div>
-              <div class="w-full md:w-1/2 p-8 lg:p-12"><span class="inline-block mb-4 text-sm text-green-400 font-medium tracking-tighter">Check our stats</span>
-                <h2 class="mb-6 text-6xl md:text-7xl text-white tracking-tighter">Meet the squad behind the screens — a team powered by caffeine and late-night debugging</h2>
-                <p class="mb-10 text-white text-opacity-60 md:max-w-xs">Hide Bank is our team project that we are proud of, reflecting our dedication, creativity, and collaboration. </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <section class="overflow-hidden">
+        <div class="flex flex-wrap -m-8" style="justify-content:center ;">
+          <div class="w-full md:w-1/2 p-8" style="border-radius: 100px;border: 2px solid gray;margin-top: calc(2vh + 2vw);margin-bottom: calc(2vh + 2vw);">
+            <div class="px-4 pt-10 md:pb-40 max-w-lg mx-auto"><a class="inline-block mb-36" href="#">                </a>              
+              <div class="text-center mx-auto">
+                <h3 class="mb-4 text-5xl text-white tracking-5xl">Modify Employee</h3>
+                <p class="mb-10 text-gray-300" id="EMPID">EMP0001</p>
+                <div class="flex flex-wrap -1 mb-7">
+                </div>
+                <div class="flex flex-wrap items-center mb-10">
+                  <div class="flex-1 bg-gray-900">
+                    <div class="h-px"></div>
+                  </div>
+                  <div class="px-5 text-xs text-gray-300 font-medium">Data to Modify</div>
+                  <div class="flex-1 bg-gray-900">
+                    <div class="h-px"></div>
+                  </div>
+                </div>
+                <div class="mb-6 border border-gray-900 focus-within:border-white overflow-hidden rounded-3xl">
+                  <input autocomplete="off" id="new salary" class="pl-6 pr-16 py-4 text-gray-300 w-full placeholder-gray-300 outline-none bg-transparent" type="text" placeholder="new Salary"/>
+                </div>
 
-      <section class="py-20 overflow-hidden">
-        
-      </section>
-      <section class="relative py-24 overflow-hidden">
-        <div class="container px-4 mx-auto">
-          <div class="mb-20 md:max-w-xl text-center mx-auto"><span class="inline-block mb-4 text-sm text-green-400 font-medium tracking-tighter">our team</span>
-            <h2 class="font-heading text-7xl lg:text-8xl text-white tracking-7xl lg:tracking-8xl">Our Team</h2>
-          </div>
-          <div class="flex flex-wrap -m-8">
-            <div class="w-full md:w-1/2 lg:w-1/3 p-8">
-              <div class="text-center"><img class="mb-9 mx-auto" src="images/mahdi.jpg" style="width: 266px;border-radius: 100% ;"><span class="inline-block mb-2 text-gray-300">CFO at Hide Bank</span>
-                <h3 class="text-3xl text-white">Mahdi Turki</h3>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 lg:w-1/3 p-8">
-              <div class="text-center"><img class="mb-9 mx-auto" src="images/hamma.png"  style="width: 266px;border-radius: 100% ;"><span class="inline-block mb-2 text-gray-300">CEO at Hide Bank</span>
-                <h3 class="text-3xl text-white">Mohamed Mnasria</h3>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 lg:w-1/3 p-8">
-              <div class="text-center"><img class="mb-9 mx-auto" src="images/ajroud.jpg" style="width: 266px;height:266px ;border-radius: 100% ;"><span class="inline-block mb-2 text-gray-300">Head Marketer Hide Bank</span>
-                <h3 class="text-3xl text-white">Yassine Ajroud</h3>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 lg:w-1/3 p-8">
-              <div class="text-center"><img class="mb-9 mx-auto" src="images/wisletiPro.png" style="width: 266px;border-radius: 100% ;"><span class="inline-block mb-2 text-gray-300">Support Lead Global Bank</span>
-                <h3 class="text-3xl text-white">Md yassine ouseleti</h3>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 lg:w-1/3 p-8">
-              <div class="text-center"><img style="width: 0px;" class="mb-9 mx-auto" src="template-assets/images/team/avatar5.png" alt=""/><span class="inline-block mb-2 text-gray-300"></span>
-                <h3 class="text-3xl text-white"> </h3>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 lg:w-1/3 p-8">
-              <div class="text-center"><img class="mb-9 mx-auto" src="images/khalil.jpg" style="width: 266px;border-radius: 100% ;"><span class="inline-block mb-2 text-gray-300">Engineer at Global Bank</span>
-                <h3 class="text-3xl text-white">5alil Derbel</h3>
+                <div class="mb-6 border border-gray-900 focus-within:border-white overflow-hidden rounded-3xl">
+                  <input autocomplete="off" id="new branch" class="pl-6 pr-16 py-4 text-gray-300 w-full placeholder-gray-300 outline-none bg-transparent" type="text" placeholder="New Branch"/>
+                </div>
+
+                <div class="mb-6 border border-gray-900 focus-within:border-white overflow-hidden rounded-3xl">
+                  <select class="select-account-type" id="new status">
+                    <option class="option-account-type" selected disabled hidden>Employee Status</option>
+                    <option class="option-account-type">active</option>
+                    <option class="option-account-type">inactive</option>
+                    <option class="option-account-type">retired</option>  
+                    <option class="option-account-type">break</option>
+                  </select>
+                </div>
+
+       
+                
+
+                <a class="block mb-6 px-14 py-4 text-center font-medium tracking-2xl border-2 border-green-400 bg-green-400 hover:bg-green-500 text-black focus:ring-4 focus:ring-green-500 focus:ring-opacity-40 rounded-full transition duration-300"  style="cursor: pointer;" onclick="SignInClicked()">Apply Changes</a>
+              
               </div>
             </div>
           </div>
-        </div>
-      </section>
-      <section class="py-20 overflow-hidden" x-data="{ showContent: false, active: 'all' }">
-        
-          </div>
-          <div class="flex flex-wrap justify-center max-w-xs mx-auto mb-6" x-show="!showContent">
-          </div>
+          
         </div>
       </section>
       <section class="py-12">
         <div class="container px-4 mx-auto">
           <div class="relative pt-20 px-4 bg-gray-900 bg-opacity-20 overflow-hidden rounded-6xl">
-            <div class="text-center md:max-w-xl mx-auto removed pb-20"><span class="inline-block mb-4 text-sm text-green-400 font-medium tracking-tighter">Hide Bank</span>
-              <h2 class="font-heading mb-6 text-7xl text-white tracking-8xl">Hide&nbsp Bank &nbsp:&nbsp a&nbsp Bank&nbsp ment &nbspto&nbsp serve &nbspYou</h2><a class="mb-8 text-gray-300 relative z-10" href="https://www.pixelrocket.store">Contact The devaloper Team Via email if some details remain unclear</a><img class="absolute -bottom-24 right-0 z-0" src="template-assets/images/application-section/lines2.png" alt=""/>
+            <div class="text-center md:max-w-xl mx-auto removed pb-20"><span class="inline-block mb-4 text-sm text-green-400 font-medium tracking-tighter">Learn to code</span>
+              <h2 class="font-heading mb-6 text-7xl text-white tracking-8xl">Want to build templates like this one?</h2><a class="mb-8 text-gray-300 relative z-10" href="https://www.pixelrocket.store">Visit www.pixelrocket.store and learn to become a frontend web developer today</a><img class="absolute -bottom-24 right-0 z-0" src="template-assets/images/application-section/lines2.png" alt=""/>
             </div>
           </div>
         </div>
@@ -164,11 +143,11 @@
                 </div>
               </div>
               <div class="w-full md:w-1/2 lg:w-2/12 p-8">
-                <h3 class="mb-6 text-lg text-black font-medium"></h3>
+                <h3 class="mb-6 text-lg text-black font-medium">About</h3>
                 <ul>
-                  <li class="mb-2.5"><a class="inline-block text-lg font-medium text-gray-400 hover:text-black transition duration-300" href="#"></a></li>
-                  <li class="mb-2.5"><a class="inline-block text-lg font-medium text-gray-400 hover:text-black transition duration-300" href="#"></a></li>
-                  <li class="mb-2.5"><a class="inline-block text-lg font-medium text-gray-400 hover:text-black transition duration-300" href="#"></a></li>
+                  <li class="mb-2.5"><a class="inline-block text-lg font-medium text-gray-400 hover:text-black transition duration-300" href="#">Contact</a></li>
+                  <li class="mb-2.5"><a class="inline-block text-lg font-medium text-gray-400 hover:text-black transition duration-300" href="#">Blog</a></li>
+                  <li class="mb-2.5"><a class="inline-block text-lg font-medium text-gray-400 hover:text-black transition duration-300" href="#">Our Story</a></li>
                   <li><a class="inline-block text-lg font-medium text-gray-400 hover:text-black transition duration-300" href="#">Careers</a></li>
                 </ul>
               </div>
@@ -206,6 +185,7 @@
                       </div></a></div>
                 </div>
               </div>
+            </div>
             <div class="flex flex-wrap justify-between -m-2">
               <div class="w-auto p-2">
                 <p class="inline-block text-sm font-medium text-black text-opacity-60">© 2023 Global Bank</p>
@@ -221,5 +201,63 @@
         </div>
       </section>
     </div>
+    <script src="Load.js"></script>
+    <Script>
+      let params = new URLSearchParams(window.location.search);
+      let EnterInfo = JSON.parse(params.get("value"));
+      console.log(EnterInfo) ;
+
+      const newSalary = document.getElementById('new salary');
+      const newBranch = document.getElementById('new branch');
+      const newStatus = document.getElementById('new status');
+      const EI = document.getElementById('EMPID');
+
+      EI.innerText = EnterInfo ;
+
+    function verifyval1(val1){//bery easy ask gbt But Must Add !!!!!!!!!!!!!!!!!!!!!
+      const v = Number(val1);
+      return !isNaN(v) && v > 0 && isFinite(v);
+    }
+    function verifyval2(val2){//bery easy ask gbt But Must Add !!!!!!!!!!!!!!!!!!!!!
+      return true
+    }
+    function updateAccountsCpp(IBAN,CustomerId,AccountName,AccountType){ // !!!!!! add new accout and return it s Number !!!!!!
+      return 0 ;// to be changed others Acc Propreties to default Loans [] ; transactions [] ; Balance 1500TDN ...
+    }
+    async function updateCpp_PromoteEmployee(EnterInfo , val1,val2,st){//work on later already exist in CEO file devolp it once 
+        await Load('Modify Employee', EnterInfo ,{ newSalary: val1 , newBranch: val2 , newStatus: st}) ;
+        window.location.href = 'CEO.html' ;
+        return true
+      }
+
+    function SignInClicked(){
+      const val1 = newSalary.value ;
+      const val2 = newBranch.value;
+      const st = newStatus.value;
+
+      newSalary.addEventListener('keypress',()=>newSalary.setCustomValidity(''));
+      newBranch.addEventListener('keypress',()=>newBranch.setCustomValidity(''));
+
+      if(!verifyval1(val1)){
+        newSalary.setCustomValidity('Unvalid Amount');
+        newSalary.reportValidity();
+      }
+      else if (!verifyval2(val2)){
+        newBranch.setCustomValidity('Unvalid Branch');
+        newBranch.reportValidity();
+      }
+      else if (st == "Employee Status"){
+        newStatus.setCustomValidity('Please Select a Status');
+        newStatus.reportValidity();
+      }
+      else{
+      updateCpp_PromoteEmployee(EnterInfo, val1,val2,st);
+    }
+
+    }
+
+
+
+    </Script>
   </body>
 </html>
