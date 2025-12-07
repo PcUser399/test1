@@ -120,7 +120,7 @@
                   </select>
                 </div>
 
-                <a class="block mb-6 px-14 py-4 text-center font-medium tracking-2xl border-2 border-green-400 bg-green-400 hover:bg-green-500 text-black focus:ring-4 focus:ring-green-500 focus:ring-opacity-40 rounded-full transition duration-300"  style="cursor: pointer;" onclick="SignInClicked()">Sign up</a>
+                <a class="block mb-6 px-14 py-4 text-center font-medium tracking-2xl border-2 border-green-400 bg-green-400 hover:bg-green-500 text-black focus:ring-4 focus:ring-green-500 focus:ring-opacity-40 rounded-full transition duration-300"  style="cursor: pointer;" onclick="SignInClicked()">Add Account</a>
               
               </div>
             </div>
@@ -208,6 +208,10 @@
     </div>
     <script src="Load.js"></script>
     <Script>
+      let params = new URLSearchParams(window.location.search);
+      let EnterInfo = JSON.parse(params.get("value"));
+      console.log(EnterInfo) ;
+
       const i1 = document.getElementById('IBinp');
       const i2 = document.getElementById('AcN');
       const i3 = document.getElementById('CN');
@@ -235,7 +239,11 @@
 
     async function updateAccountsCpp(Branch,AccountName,CustomerId,AccountType,note){ 
       await Load('createAccount', 'd' ,{Branch , AccountName , CustomerId , note , AccountType });
-      window.open("index.html?","_self");
+      if(EnterInfo){
+        window.open("Employee.html?value="+encodeURIComponent(JSON.stringify(EnterInfo)),"_self");
+      }
+      else{
+      window.open("index.html?","_self");}
       return 0 ;
     }
 

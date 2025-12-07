@@ -140,22 +140,22 @@
 
            </div>
 
-          <div class="add-Account" title="Add Account" onclick="window.location.href='register.html'">
-            +
-          </div>
+            <div class="add-Account" title="Add Account" style="z-index: 9999;" onclick="window.open('register.html?value='+encodeURIComponent(JSON.stringify(EnterInfo)),'_self')">
+              +
+            </div>
           
-        </div>
+          </div>
         <div style="display: flex; width : 100% ; justify-content : center ;  gap :  20px ; margin-top : 150px ; margin-bottom :20px";>
 
               <div class="w-auto hidden lg:block">
-                    <div class="inline-block"><a class="inline-block px-8 py-4 text-white hover:text-black tracking-tighter hover:bg-green-400 border-2 border-white focus:border-green-400 focus:border-opacity-40 hover:border-green-400 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300 saas"  style="font-size: calc(1vh + 1vw);font-family: serif;border: none;background-color: rgb(129, 160, 6);cursor: pointer;" onclick="finilizeDay()">Finilze Day</a></div>
+                    <div class="inline-block"><a class="inline-block px-8 py-4 text-white hover:text-black tracking-tighter hover:bg-green-400 border-2 border-white focus:border-green-400 focus:border-opacity-40 hover:border-green-400 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300 saas"  style="font-size: calc(1vh + 1vw);font-family: serif;border: none;background-color: rgb(129, 160, 6);cursor: pointer;" onclick="finilizeDay();window.scrollTo(0,400)"">Finilze Day</a></div>
               </div>
               <div class="w-auto hidden lg:block">
-                    <div class="inline-block"><a class="inline-block px-8 py-4 text-white hover:text-black tracking-tighter hover:bg-green-400 border-2 border-white focus:border-green-400 focus:border-opacity-40 hover:border-green-400 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300 saas"  style="font-size: calc(1vh + 1vw);font-family: serif;border: none;background-color: rgb(129, 160, 6);cursor: pointer;" onclick="deleteCompletedLoans()">Delete Completed Loans</a></div>
+                    <div class="inline-block"><a class="inline-block px-8 py-4 text-white hover:text-black tracking-tighter hover:bg-green-400 border-2 border-white focus:border-green-400 focus:border-opacity-40 hover:border-green-400 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300 saas"  style="font-size: calc(1vh + 1vw);font-family: serif;border: none;background-color: rgb(129, 160, 6);cursor: pointer;" onclick="deleteCompletedLoans();window.scrollTo(0,400)"">Delete Completed Loans</a></div>
               </div>
 
               <div class="w-auto hidden lg:block">
-                    <div class="inline-block"><a class="inline-block px-8 py-4 text-white hover:text-black tracking-tighter hover:bg-green-400 border-2 border-white focus:border-green-400 focus:border-opacity-40 hover:border-green-400 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300 saas"  style="font-size: calc(1vh + 1vw);font-family: serif;border: none;background-color: rgb(129, 160, 6);cursor: pointer;" onclick="deleteAllClosedAccounts()">Delete All Closed Accounts</a></div>
+                    <div class="inline-block"><a class="inline-block px-8 py-4 text-white hover:text-black tracking-tighter hover:bg-green-400 border-2 border-white focus:border-green-400 focus:border-opacity-40 hover:border-green-400 focus:ring-4 focus:ring-green-400 focus:ring-opacity-40 rounded-full transition duration-300 saas"  style="font-size: calc(1vh + 1vw);font-family: serif;border: none;background-color: rgb(129, 160, 6);cursor: pointer;" onclick="deleteAllClosedAccounts();window.scrollTo(0,400)">Delete All Closed Accounts</a></div>
               </div>
         </div>
             
@@ -408,7 +408,7 @@
                     <p class="text-sm text-gray-300">@${(el.accountName).replaceAll(' ','')}</p>
                   </div>
                 </div>
-                <p class="mb-4 text-white">${(el.note).replaceAll(/\n/g, "<br><br>")}</p>
+                <div class="mb-4 text-white w-full break-words" style="word-wrap: break-word;">${(el.note).replaceAll(/\n/g, "<br><br>")}</div>
                 <div class="flex flex-wrap items-center -m-2.5 mb-1.5">
                   <div class="w-auto p-2.5">
                     <p class="text-sm text-gray-300">Branch : ${el.branch}</p>

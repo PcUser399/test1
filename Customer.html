@@ -273,7 +273,7 @@
 
 
       function displayUpperInfo(){
-        acB.innerText = Number(allAccountData.balance).toFixed(2);
+        acB.innerText = Number(allAccountData.balance).toFixed(0) + " TDN";
         acBr.innerText = allAccountData.branch ;
         acT.innerText = allAccountData.type ;
         acS.innerText = allAccountData.status ;
